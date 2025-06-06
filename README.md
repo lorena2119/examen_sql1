@@ -31,9 +31,8 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO clientes(nombre, email, numeroContacto, direccion, ciudad, pais)
+VALUES('Lorena Contreras', 'lorena@gmail.com',  '0341-5551234', 'Calle Industria 45', 'Bucaramanga', 'Colombia');
 ```
 
 
@@ -43,9 +42,17 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO productos(tipo_id, nombre, precio)
+VALUES(1, 'Ricotta',  99);
+INSERT INTO pizzas (
+    producto_id,
+    tamano,
+    sabor
+) VALUES
+    (
+      (SELECT producto_id FROM productos WHERE nombre = 'Ricotta'),
+      'Grande', 'Queso'
+    );
 ```
 
 
@@ -55,9 +62,16 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO productos(tipo_id, nombre, precio)
+VALUES(2, 'Strawberry Passion',  45);
+INSERT INTO bebidas (
+    producto_id,
+    sabor
+) VALUES
+    (
+      (SELECT producto_id FROM productos WHERE nombre = 'Strawberry Passion'),
+      'Fresa'
+    );
 ```
 
 
@@ -67,9 +81,8 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO ingredientes(nombre, stock)
+VALUES('Cebolla',  45);
 ```
 
 
@@ -79,9 +92,8 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO pedidos (cliente_id, fecha_pedido, estado) VALUES
+(1, '2023-02-10', 'Entregado');
 ```
 
 
@@ -91,9 +103,8 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO detalles_pedidos (pedido_id, producto_id, cantidad, precio_unitario) VALUES
+(1,  1,  800,  99);
 ```
 
 
@@ -103,9 +114,8 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+INSERT INTO pedidos (cliente_id, fecha_pedido, estado, ingrediente_id) VALUES
+(1, '2025-02-10', 'Pendiente', 1);
 ```
 
 
@@ -115,9 +125,10 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+SELECT d.*, p.ingrediente_id
+FROM detalles_pedidos as d
+INNER JOIN pedidos as p ON p.pedido_id = d.pedido_id
+WHERE p.pedido_id =1;
 ```
 
 
@@ -127,9 +138,7 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+UPDATE productos SET precio = 200 WHERE producto_id = 1;
 ```
 
 
@@ -139,9 +148,7 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+UPDATE clientes SET direccion = 'Barrio caldas' WHERE cliente_id = 1;
 ```
 
 
@@ -151,9 +158,7 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+DELETE FROM productos WHERE nombre = 'Strawberry Passion';
 ```
 
 
@@ -163,9 +168,7 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+DELETE FROM ingredientes WHERE ingrediente_id = 1;
 ```
 
 
@@ -187,9 +190,8 @@ Pagos y Recogida: Los pedidos solo comenzarán a prepararse una vez realizado el
 
 
 ```sql
-
-
-
+SELECT * 
+FROM productos;
 ```
 
 
