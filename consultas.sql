@@ -70,3 +70,13 @@ DELETE FROM ingredientes WHERE ingrediente_id = 1;
 --14. **Listar todos los productos disponibles en el menú (pizzas y bebidas):**
 SELECT * 
 FROM productos;
+
+-- 15. **Listar todos los ingredientes disponibles para personalizar una pizza:**
+SELECT * 
+FROM ingredientes;
+
+--16. **Calcular el costo total de un pedido (incluyendo ingredientes adicionales):**
+SELECT d.cantidad*d.precio_unitario as Total, p.ingrediente_id
+FROM detalles_pedidos as d
+INNER JOIN pedidos as p ON p.pedido_id = d.pedido_id
+WHERE p.pedido_id =1;

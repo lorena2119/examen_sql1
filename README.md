@@ -201,9 +201,8 @@ FROM productos;
 
 
 ```sql
-
-
-
+SELECT * 
+FROM ingredientes;
 ```
 
 
